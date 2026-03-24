@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proporcionalidad Compuesta — Ingeniería Industrial</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f8f9fc;
+    --surface2: #eef1f8;
+    --border: #e2e6f0;
+    --accent: #059669; /* Verde Industrial */
+    --accent2: #0284c7;
+    --accent-warn: #d97706;
+    --accent-danger: #dc2626;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --card-shadow: 0 4px 20px rgba(5, 150, 105, 0.08);
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Sora', sans-serif; line-height: 1.6; }
+
+  header {
+    background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+    color: white; padding: 60px 20px; text-align: center;
+  }
+  header h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; }
+
+  nav {
+    background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: center; gap: 10px; padding: 10px;
+  }
+  nav button {
+    background: none; border: none; padding: 12px 20px; font-weight: 600;
+    color: var(--text-muted); cursor: pointer; border-radius: var(--radius); transition: 0.3s;
+  }
+  nav button.active { background: var(--surface2); color: var(--accent); }
+
+  main { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; margin-bottom: 25px; box-shadow: var(--card-shadow); }
+  .card h3 { color: var(--accent); margin-bottom: 15px; }
+
+  /* Cuadro Verde Estilo Cartilla */
+  .cuadro-recordar {
+    background: #ecfdf5; border-left: 6px solid var(--accent); padding: 25px;
+    border-radius: 8px; margin: 30px 0;
+  }
+  .cuadro-recordar h4 { color: #065f46; font-size: 1.2rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+
+  .formula {
+    background: #1e293b; color: #34d399; padding: 20px; border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace; text-align: center; font-size: 1.2rem; margin: 20px 0;
+  }
+
+  /* Quiz */
+  .quiz-item { background: white; border: 1px solid var(--border); padding: 20px; border-radius: var(--radius); margin-bottom: 20px; }
+  .option-btn {
+    display: block; width: 100%; text-align: left; padding: 15px; margin: 8px 0;
+    border: 1px solid var(--border); border-radius: 8px; cursor: pointer; background: white; transition: 0.2s;
+  }
+  .option-btn:hover { border-color: var(--accent); background: #f0fdf4; }
+  .option-btn.selected { background: var(--surface2); border-color: var(--accent); }
+  
+  .feedback { margin-top: 10px; padding: 15px; border-radius: 8px; display: none; font-size: 0.9rem; }
+  .feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+  .feedback.wrong { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+  .btn-main {
+    background: var(--accent); color: white; border: none; padding: 15px 30px;
+    border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; margin-top: 20px;
+  }
+
+  #cert-area {
+    display: none; border: 10px double var(--accent); padding: 60px 40px;
+    text-align: center; background: white; margin-top: 40px; box-shadow: 0 0 40px rgba(0,0,0,0.05);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚙️ Proporcionalidad Compuesta</h1>
+  <p>Optimización de Procesos e Ingeniería Industrial</p>
+</header>
+
+<nav>
+  <button class="active" onclick="showTab('inicio', this)">🏠 Inicio</button>
+  <button onclick="showTab('teoria', this)">📚 Conceptos</button>
+  <button onclick="showTab('metodo', this)">🧮 Método</button>
+  <button onclick="showTab('examen', this)">✏️ Certificación</button>
+</nav>
+
+<main>
+  <section id="inicio" class="section active">
+    <div class="card">
+      <h2>Ingeniería Industrial y Eficiencia</h2>
+      <p>En nuestra carrera, la proporcionalidad compuesta es vital para el <strong>Dimensionamiento de Planta</strong>. ¿Cuántas máquinas necesitamos para producir 50,000 unidades si el turno cambia de 8 a 12 horas? ¿Cómo afecta el número de operarios al lead time? Aquí aprenderás a calcularlo.</p>
+    </div>
+    <div class="cuadro-recordar">
+      <h4>🟢 PARA RECORDAR SIEMPRE</h4>
+      <p><strong>Relación Directa:</strong> A más operarios, más producción (+ operarios = + unidades).</p>
+      <p><strong>Relación Inversa:</strong> A más operarios, menos tiempo de entrega (+ operarios = - horas).</p>
+      <p><strong>Constante K:</strong> Es el indicador de productividad que buscamos mantener u optimizar.</p>
+    </div>
+  </section>
+
+  <section id="teoria" class="section">
+    <div class="card">
+      <h3>Definición Profesional</h3>
+      <p>La proporcionalidad compuesta vincula tres o más magnitudes. En la industria, estas magnitudes suelen ser: <strong>Hombres, Máquinas, Tiempo, Producción y Rendimiento.</strong></p>
+      <div class="formula">Producción / (Hombres * Tiempo * Rendimiento) = Constante</div>
+    </div>
+    <div class="card">
+      <h3>Análisis de Variables</h3>
+      <ul>
+        <li><strong>Operarios vs. Tiempo:</strong> Inversa (Más gente, menos tiempo).</li>
+        <li><strong>Operarios vs. Producción:</strong> Directa (Más gente, más piezas).</li>
+        <li><strong>Máquinas vs. Tiempo:</strong> Inversa (Más máquinas, menos tiempo).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="metodo" class="section">
+    <div class="card accent">
+      <h3>Procedimiento Paso a Paso</h3>
+      <ol style="margin-left: 20px; display: flex; flex-direction: column; gap: 15px;">
+        <li><strong>Identificación:</strong> Crea una tabla con las magnitudes conocidas y la incógnita (X).</li>
+        <li><strong>Comparación Binaria:</strong> Compara la magnitud de la incógnita con cada una de las otras.</li>
+        <li><strong>Planteamiento:</strong> Si es Directa (D), la fracción se invierte. Si es Inversa (I), la fracción se mantiene.</li>
+        <li><strong>Resolución:</strong> Despeja X operando las fracciones resultantes.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="examen" class="section">
+    <h2>Evaluación de Competencia Industrial</h2>
+    <p>Resuelve los 10 casos prácticos. Requiere 8/10 para generar certificación.</p>
+    <div id="quiz-container"></div>
+    <button class="btn-main" onclick="evaluarExamen()">Finalizar y Validar Certificado</button>
+
+    <div id="cert-area">
+      <h3 style="color: var(--accent); letter-spacing: 4px; font-weight: 800;">DIPLOMA DE EXCELENCIA</h3>
+      <p style="margin: 20px 0;">Otorgado por el Departamento de Ciencias Básicas a:</p>
+      <h1 id="user-name" style="font-family: 'Lora', serif; font-size: 3rem; margin: 30px 0; border-bottom: 2px solid #ccc; display: inline-block; min-width: 400px;">---</h1>
+      <p>Por demostrar dominio avanzado en <strong>Proporcionalidad Compuesta aplicada a Procesos Industriales</strong>.</p>
+      <p style="margin-top: 40px; font-size: 0.8rem; color: var(--text-muted);">Verificado por Sistema de IA Ucompensar - 2026</p>
+    </div>
+  </section>
+</main>
+
+<script>
+const banca = [
+  { q: "5 máquinas inyectoras producen 10,000 piezas en 4 horas. ¿Cuántas horas tardarán 8 máquinas en producir 20,000 piezas?", opts: ["5 horas", "4 horas", "6.25 horas"], c: 0, exp: "Máquinas(I): 5/8, Piezas(D): 20/10. 4 * (5/8) * 2 = 5." },
+  { q: "12 operarios ensamblan 600 motores en 10 días. ¿Cuántos operarios se requieren para ensamblar 900 motores en 6 días?", opts: ["25 operarios", "30 operarios", "18 operarios"], c: 1, exp: "Motores(D): 9/6, Días(I): 10/6. 12 * 1.5 * (10/6) = 30." },
+  { q: "Un montacargas mueve 50 pallets en 2 horas consumiendo 4L de combustible. ¿Cuántos litros consumirán 3 montacargas para mover 300 pallets en 4 horas?", opts: ["12L", "48L", "24L"], c: 1, exp: "Pallets(D): 300/50, Horas(D): 4/2. Nota: Cada montacargas gasta combustible individualmente." },
+  { q: "Una línea de empaque con 4 robots procesa 2,000 cajas en 8 horas. Si se añaden 2 robots más y el turno baja a 6 horas, ¿cuántas cajas se procesarán?", opts: ["2,250 cajas", "3,000 cajas", "1,800 cajas"], c: 0, exp: "Robots(D): 6/4, Horas(D): 6/8. 2000 * 1.5 * 0.75 = 2250." },
+  { q: "En un almacén, 6 estibadores descargan 3 camiones en 90 min. ¿Cuántos minutos tardarán 9 estibadores en descargar 2 camiones?", opts: ["40 min", "60 min", "45 min"], c: 0, exp: "Estibadores(I): 6/9, Camiones(D): 2/3. 90 * (6/9) * (2/3) = 40." },
+  { q: "Una planta textil gasta $5,000 en electricidad usando 10 telares por 12 horas al día. ¿Cuánto costará usar 15 telares por 8 horas al día?", opts: "$5,000", opts: ["$5,000", "$7,500", "$4,500"], c: 0, exp: "Telares(D): 15/10, Horas(D): 8/12. 5000 * 1.5 * 0.66 = 5000." },
+  { q: "8 técnicos realizan el mantenimiento de 12 máquinas en 15 horas. ¿Cuántos técnicos se necesitan para 16 máquinas en 10 horas?", opts: ["16 técnicos", "20 técnicos", "12 técnicos"], c: 0, exp: "Máquinas(D): 16/12, Horas(I): 15/10. 8 * (4/3) * 1.5 = 16." },
+  { q: "Para pavimentar 2km de vía se usan 10 obreros durante 20 días trabajando 8h/día. ¿Cuántos días tardarán 15 obreros para 3km trabajando 10h/día?", opts: ["12 días", "16 días", "14 días"], c: 1, exp: "Obreros(I): 10/15, km(D): 3/2, Horas(I): 8/10. 20 * (10/15) * 1.5 * 0.8 = 16." },
+  { q: "Una caldera consume 500kg de carbón para calentar 2,000L de agua en 3 horas. ¿Cuántos kg se requieren para 5,000L en 6 horas?", opts: ["2,500kg", "1,250kg", "3,000kg"], c: 0, exp: "Agua(D): 5/2, Horas(D): 6/3. 500 * 2.5 * 2 = 2500." },
+  { q: "Si 4 auditores revisan 20 procesos en 5 días trabajando 6h/día. ¿Cuántas horas al día deben trabajar 2 auditores para revisar 10 procesos en 10 días?", opts: ["3 horas", "6 horas", "4 horas"], c: 0, exp: "Auditores(I): 4/2, Procesos(D): 10/20, Días(I): 5/10. 6 * 2 * 0.5 * 0.5 = 3." }
+];
+
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function renderQuiz() {
+  const container = document.getElementById('quiz-container');
+  banca.forEach((p, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-item';
+    div.innerHTML = `<h4>${i+1}. ${p.q}</h4>` + 
+      p.opts.map((o, idx) => `<button class="option-btn" onclick="check(${i}, ${idx}, this)">${o}</button>`).join('') +
+      `<div id="feed-${i}" class="feedback"></div>`;
+    container.appendChild(div);
+  });
+}
+
+function check(qIdx, oIdx, btn) {
+  const item = banca[qIdx];
+  const feed = document.getElementById(`feed-${qIdx}`);
+  feed.style.display = 'block';
+  
+  btn.parentElement.querySelectorAll('.option-btn').forEach(b => b.style.pointerEvents = 'none');
+
+  if(oIdx === item.c) {
+    btn.classList.add('selected');
+    btn.style.borderColor = "var(--accent)";
+    feed.innerHTML = "✅ ¡Correcto! " + item.exp;
+    feed.className = "feedback correct";
+  } else {
+    btn.style.borderColor = "var(--accent-danger)";
+    feed.innerHTML = "❌ Incorrecto. " + item.exp;
+    feed.className = "feedback wrong";
+  }
+}
+
+function evaluarExamen() {
+  const corrects = document.querySelectorAll('.feedback.correct').length;
+  if(corrects >= 8) {
+    const nombre = prompt("¡Aprobado con " + corrects + "/10! Ingresa tu nombre completo:");
+    if(nombre) {
+      document.getElementById('user-name').innerText = nombre.toUpperCase();
+      document.getElementById('cert-area').style.display = "block";
+      window.scrollTo({top: document.getElementById('cert-area').offsetTop, behavior: 'smooth'});
+    }
+  } else {
+    alert("Puntaje: " + corrects + "/10. Necesitas al menos 8 aciertos para el diploma. ¡Sigue practicando!");
+  }
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
